@@ -5,12 +5,14 @@
 
 void fifo_worker_handler(struct k_msgq *requests, struct k_msgq *results, int id)
 {
-    while (1) {
-        struct request_msg data = {};
-        k_msgq_get(requests, &data, K_FOREVER);
-        data.output = data.input + 5;
-        data.handled_by = id;
-        k_msleep(sys_rand32_get() >> 24);
-        k_msgq_put(results, &data, K_FOREVER);
+    struct request_msg cur_message;
+
+    while(1){
+         
+        k_msgq_get(&requests, &cur_message, K_FOREVER);
+        cur_message.output = input + 5;
+        cur_message.handled_by = id;
+        k_msgq_put(&results, &cur_message, K_FOREVER);
+
     }
 }
