@@ -85,6 +85,7 @@ void test_nothing(void)
     k_msgq_get(&response, &data, K_FOREVER);
     TEST_ASSERT_EQUAL_INT(data.input, 42);
     TEST_ASSERT_EQUAL_INT(data.input + 5, data.output);
+
     TEST_ASSERT_EQUAL_INT(-EAGAIN, k_msgq_get(&response, &data, K_MSEC(1000)));
 }
 
